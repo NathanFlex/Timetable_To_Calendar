@@ -53,13 +53,6 @@ for day in range(7):
         classname = (extracted[day][eachTime]).split('-')[1]
         startTimeHour = int(timings[classesCounter][:2:])
         startTimeMinute = int(timings[classesCounter][3::])
-        # print(startDate)
-        # print(type(startDate))
-        # print(startDate.year())
-        # print(startDate.month())
-        # print(startDate.day())
-        # print(startTimeHour)
-        # print(startTimeMinute)
         startDateTime = datetime(startDate.year, startDate.month, startDate.day, hour=startTimeHour, minute=startTimeMinute)
         endDataTime = startDateTime + timedelta(minutes=50)
         classesCounter += 1
