@@ -15,10 +15,10 @@ def setupflow():                                                #the flow setups
     pickle.dump(credentials, open('token.pkl','wb'))
     return True
 
-def createCalendar():                                           #This function creates the calendar for the user        
+def createCalendar(calendarName):                                           #This function creates the calendar for the user        
     global idOfCalendar
     calendar = {
-        'summary': 'VIT Timetable',
+        'summary': calendarName,
         'timeZone': 'Asia/Kolkata'
     }
     created_calendar = service.calendars().insert(body=calendar).execute()
@@ -31,11 +31,11 @@ def calcMondaysDate():
     2) from 1) get which day, output would be a number between 0-6 ; 0 being monday and 6 being sunday - Day
     3) subtract todays date - day = monday's date (aa-bb-cccc)
     4) take the start time from timings
-    today is 3rd of december 2021, friday which is 4 
-    inorder to get monday I need to subtract 3/1/2021 - 4days = monday(29th November)?'''
+    today is 3rd of december 2021, friday which is 4
+    inorder to get monday I need to subtract 3/1/2021 - (4days(friday) + 1) = monday(29th November)?'''
     todaysDate = date.today()
     todaysDay = todaysDate.weekday()
-    mondaysDate = todaysDate - timedelta(days=todaysDay)
+    mondaysDate = todaysDate - timedelta( days = ( todaysDay + 1 ) )
     return mondaysDate
 
 credentials = pickle.load(open('token.pkl','rb'))              #retrieves the credentials
@@ -43,7 +43,7 @@ service = build('calendar','v3', credentials = credentials)    #creating an inst
 
 startDate = calcMondaysDate()
 setupflow()                                                    #run setupflow() and createCalendar only in the first run
-createCalendar()
+createCalendar('Sem1 Timetable')
 
 for day in range(7):
     classesCounter = 0 
@@ -81,7 +81,5 @@ for day in range(7):
 
         event = service.events().insert(calendarId=idOfCalendar, body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
-
-
 
 
