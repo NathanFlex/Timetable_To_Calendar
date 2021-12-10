@@ -2,6 +2,9 @@
 1) Converting the user inputted screenshot of the timetable to CSV file (OCRapi.py)
 2) Extrating the desired data from the CSV file (extraction.py) into a dictionary for easy accessibility
 3) Add the data into the user's calendar'''
+
+calendarName = "Sem1 Timetable"                                 #enter the name of timetable you wish for your google acc
+
 import pickle
 from datetime import *
 from Extraction import *
@@ -38,12 +41,12 @@ def calcMondaysDate():
     mondaysDate = todaysDate - timedelta( days = ( todaysDay + 1 ) )
     return mondaysDate
 
-credentials = pickle.load(open('token.pkl','rb'))              #retrieves the credentials
-service = build('calendar','v3', credentials = credentials)    #creating an instance
+setupflow()
+credentials = pickle.load(open('token.pkl','rb'))                           #retrieves the credentials  
+service = build('calendar','v3', credentials = credentials)                 #creating an instance
+createCalendar(calendarName)
 
-startDate = calcMondaysDate()
-setupflow()                                                    #run setupflow() and createCalendar only in the first run
-createCalendar('Sem1 Timetable')
+startDate = calcMondaysDate()                                                  #run setupflow() and createCalendar only in the first run
 
 for day in range(7):
     classesCounter = 0 
@@ -81,5 +84,4 @@ for day in range(7):
 
         event = service.events().insert(calendarId=idOfCalendar, body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
-
 
