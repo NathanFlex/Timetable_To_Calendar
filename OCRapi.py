@@ -2,7 +2,7 @@ import requests
 import json
 import csv
 
-pathOfImage = 'timetable.png'
+pathOfImage = 'Timetable_Nathan.png'
 
 url = 'https://app.nanonets.com/api/v2/ObjectDetection/Model/df672ace-ef4c-4bd5-b514-373bf377ee44/LabelFile/'
 
@@ -22,5 +22,4 @@ with open('Timetable.csv','w', newline='') as fcsv:
         if len(row) == 15:
             writer.writerow(row)
             row = []
-            counter=0
 
