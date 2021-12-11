@@ -3,10 +3,11 @@
 2) Extrating the desired data from the CSV file (extraction.py) into a dictionary for easy accessibility
 3) Add the data into the user's calendar'''
 
-calendarName = "Sem1 Timetable"                                 #enter the name of timetable you wish for your google acc
+calendarName = "Sem1 Timetable of Nathan"                                 #enter the name of timetable you wish for your google acc
 
 import pickle
 from datetime import *
+import OCRapi
 from Extraction import *
 from apiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
