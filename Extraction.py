@@ -67,7 +67,7 @@ def extract(dataOfEmpty, dataOfGiven):                          #The function se
 empty = emptyTimetableInit()                                                    #calling the function defined previously
 given = timetableInit()
 extracted = extract(empty, given)
-print(extracted)
+#print(extracted)                                                               #if an errror regarding out of index of list comes, print this for easier debugging
 
 
 
