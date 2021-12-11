@@ -21,28 +21,28 @@ def extract(dataOfEmpty, dataOfGiven):                          #The function se
     maindata = {}
     time = {}
     for row in range(len(dataOfEmpty)):                       
-        for coulmn in range(len(dataOfEmpty[row])):                        
-            if dataOfEmpty[row][coulmn] != dataOfGiven[row][coulmn]:            #Iterating through the lists and searching for differences
-                if coulmn == 2 :                                                #Using the coulmn number, we can know which time each subject falls in which slot. Upon finding it we are adding it to a dictionary (time) which adds the time as key and value as the subject.
-                    time['08:00'] = dataOfGiven[row][coulmn]  
-                elif coulmn == 3:
-                    time['08:55'] = dataOfGiven[row][coulmn]
-                elif coulmn == 4:
-                    time['09:50'] = dataOfGiven[row][coulmn]
-                elif coulmn == 5:
-                    time['10:45'] = dataOfGiven[row][coulmn]
-                elif coulmn == 9:
-                    time['14:00'] = dataOfGiven[row][coulmn]
-                elif coulmn == 10:
-                    time['14:55'] = dataOfGiven[row][coulmn]
-                elif coulmn == 11:
-                    time['15:50'] = dataOfGiven[row][coulmn]
-                elif coulmn == 12:
-                    time['16:45'] = dataOfGiven[row][coulmn]
-                elif coulmn == 13:
-                    time['17:40'] = dataOfGiven[row][coulmn]
-                elif coulmn == 14:
-                    time['18:30'] = dataOfGiven[row][coulmn]
+        for column in range(len(dataOfEmpty[row])):                        
+            if dataOfEmpty[row][column] != dataOfGiven[row][column] and (column != 0 or column != 1) and len(dataOfGiven[row][column]) > 5:            #Iterating through the lists and searching for differences and accounting for error by nanonets API 
+                if column == 2 :                                                                                 #Using the column number, we can know which time each subject falls in which slot. Upon finding it we are adding it to a dictionary (time) which adds the time as key and value as the subject.
+                    time['08:00'] = dataOfGiven[row][column]  
+                elif column == 3:
+                    time['08:55'] = dataOfGiven[row][column]
+                elif column == 4:
+                    time['09:50'] = dataOfGiven[row][column]
+                elif column == 5:
+                    time['10:45'] = dataOfGiven[row][column]
+                elif column == 9:
+                    time['14:00'] = dataOfGiven[row][column]
+                elif column == 10:
+                    time['14:55'] = dataOfGiven[row][column]
+                elif column == 11:
+                    time['15:50'] = dataOfGiven[row][column]
+                elif column == 12:
+                    time['16:45'] = dataOfGiven[row][column]
+                elif column == 13:
+                    time['17:40'] = dataOfGiven[row][column]
+                elif column == 14:
+                    time['18:30'] = dataOfGiven[row][column]
     
         if row == 4 or row == 5:                                                #Using the row number we can understand which day it falls into, and adding it to the final dictionary maindata where the day is the key and the time (dictionary containing time and subject name) is the va;ue of the desired dictionary.
             maindata[0] = time                                              # 0 represents monday
@@ -67,5 +67,7 @@ def extract(dataOfEmpty, dataOfGiven):                          #The function se
 empty = emptyTimetableInit()                                                    #calling the function defined previously
 given = timetableInit()
 extracted = extract(empty, given)
+print(extracted)
+
 
 
